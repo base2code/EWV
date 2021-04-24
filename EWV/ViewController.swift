@@ -30,8 +30,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
         
-        // startTimer()
-        showNodes()
+        startTimer()
+//        showNodes()
         
         // Create a new scene
         //let scene = SCNScene(named: "art.scnassets/ship.scn")!
@@ -41,7 +41,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(removeNodes), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(spawnNewNodes), userInfo: nil, repeats: true)
     }
     
     var nodesArray: [SCNNode] = []
@@ -52,6 +52,26 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
         
         nodesArray.removeAll()
+    }
+    
+    @objc func spawnNewNodes() {
+        for x in stride(from: 0, to: 0.25, by: 0.015) {
+            for z in stride(from: -0.25, to: 0.25, by: 0.015) {
+                let node = SCNNode();
+                node.geometry = SCNSphere(radius: 0.01)
+                node.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
+                node.position = SCNVector3(Double(x), calculateY(x: Double(x+2), z: Double(z+2)), Double(z))
+                let x1 = x+2*x+2
+                let z1 = z+2*z+2
+                let move = SCNAction.moveBy(x: CGFloat(x1), y: CGFloat(calculateY(x: Double(x1), z: Double(z1))), z: CGFloat(z1), duration: 5)
+                node.runAction(move)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                    node.removeFromParentNode()
+                }
+                sceneView.scene.rootNode.addChildNode(node)
+                nodesArray.append(node)
+            }
+        }
     }
     
     @objc func showNodes(){
