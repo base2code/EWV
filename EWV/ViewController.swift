@@ -17,6 +17,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var timer = Timer()
     
     @IBOutlet weak var Amplitude: UISlider!
+    @IBOutlet weak var Periode: UISlider!
+    
     
     
     override func viewDidLoad() {
@@ -38,10 +40,22 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Set the scene to the view
         //sceneView.scene = scene
         
+        
+        
+    }
+    @IBOutlet weak var AmpValue: UILabel!
+    @IBOutlet weak var PerValue: UILabel!
+    
+    @IBAction func AmpChanged(_ sender: Any) {
+        AmpValue.text = String(Amplitude.value.rounded())
+    }
+    @IBAction func PerChanged(_ sender: Any) {
+        PerValue.text = String(Periode.value.rounded())
     }
     
+    
     @objc func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(spawnNewNodes), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(spawnNewNodes), userInfo: nil, repeats: true)
     }
     
     var nodesArray: [SCNNode] = []
@@ -55,15 +69,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func spawnNewNodes() {
-        for x in stride(from: 0, to: 0.25, by: 0.015) {
-            for z in stride(from: -0.25, to: 0.25, by: 0.015) {
+        for x in stride(from: 0, to: 0.2, by: 0.015) {
+            for z in stride(from: -0.2, to: 0.2, by: 0.015) {
                 let node = SCNNode();
                 node.geometry = SCNSphere(radius: 0.01)
                 node.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
                 node.position = SCNVector3(Double(x), calculateY(x: Double(x+2), z: Double(z+2)), Double(z))
                 let x1 = x+2*x+2
                 let z1 = z+2*z+2
-                let move = SCNAction.moveBy(x: CGFloat(x1), y: CGFloat(calculateY(x: Double(x1), z: Double(z1))), z: CGFloat(z1), duration: 5)
+                let move = SCNAction.moveBy(x: CGFloat(x1), y: CGFloat(0), z: CGFloat(z1), duration: 5)
                 node.runAction(move)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                     node.removeFromParentNode()
@@ -90,7 +104,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func calculateY(x: Double, z: Double) -> Double {
         let sqrt = (x * x + z * z).squareRoot()
-        let sqrt1 = (sqrt / 0.25)
+        let sqrt1 = (sqrt / 0.25) / Double(Periode.value)
         let f = (2 * Double.pi * sqrt1)
         // f.round()
         let i = Double(Amplitude.value/10) * sin(f) * 1
@@ -138,5 +152,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
+    }
+    
+    override open var shouldAutorotate: Bool {
+        return false
     }
 }
