@@ -55,7 +55,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     
     @objc func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(spawnNewNodes), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(spawnNewNodes), userInfo: nil, repeats: true)
     }
     
     var nodesArray: [SCNNode] = []
@@ -68,16 +68,46 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         nodesArray.removeAll()
     }
     
+    var step = 0.0
+    
     @objc func spawnNewNodes() {
-        for x in stride(from: 0, to: 0.2, by: 0.015) {
+        if step >= 5.01 {
+            step = 0.0
+        }
+        
+        let x = step
             for z in stride(from: -0.2, to: 0.2, by: 0.015) {
                 let node = SCNNode();
                 node.geometry = SCNSphere(radius: 0.01)
                 node.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
-                node.position = SCNVector3(Double(x), calculateY(x: Double(x+2), z: Double(z+2)), Double(z))
-                let x1 = x+2*x+2
-                let z1 = z+2*z+2
-                let move = SCNAction.moveBy(x: CGFloat(x1), y: CGFloat(0), z: CGFloat(z1), duration: 5)
+                let tmp1 = Double((Double(Periode.value) * 1.0 / 2.5) + x)
+                let tmp2 = Double((Double(Periode.value) * 1.0 / 2.5) + z)
+                node.position = SCNVector3(Double(0), calculateY(x: Double(tmp1), z: Double(tmp2)), Double(0))
+                
+                var z1 = 0.0
+                if z < 0 {
+                    z1 = Double(Periode.value * 1.0 / 2.5) * 5 * z * -1;
+                }else if z > 0{
+                    z1 = Double(Periode.value * 1.0 / 2.5) * 5 * z;
+                }
+                
+//                let z1 = Double(Periode.value * 1.0 / 2.5) * z
+                
+                let x1 = Double(Periode.value * 1.0 / 2.5)
+//                let x1 = 2 * Double(Periode.value) * Double(step) + x
+//                if x < 0 {
+//                    x1 = 32 * x * -1
+//                }else if x > 0 {
+//                    x1 = 32 * x
+//                }
+                
+                var move = SCNAction()
+
+                if z <= 0 {
+                    move = SCNAction.moveBy(x: CGFloat(x1), y: CGFloat(0), z: CGFloat(z1 * -1), duration: 5)
+                }else{
+                    move = SCNAction.moveBy(x: CGFloat(x1), y: CGFloat(0), z: CGFloat(z1), duration: 5)
+                }
                 node.runAction(move)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                     node.removeFromParentNode()
@@ -85,7 +115,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 sceneView.scene.rootNode.addChildNode(node)
                 nodesArray.append(node)
             }
-        }
+    
+        step += 0.01
+    
     }
     
     @objc func showNodes(){
@@ -104,7 +136,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func calculateY(x: Double, z: Double) -> Double {
         let sqrt = (x * x + z * z).squareRoot()
-        let sqrt1 = (sqrt / 0.25) / Double(Periode.value)
+        let sqrt1 = (sqrt / 0.25) / 1
         let f = (2 * Double.pi * sqrt1)
         // f.round()
         let i = Double(Amplitude.value/10) * sin(f) * 1
