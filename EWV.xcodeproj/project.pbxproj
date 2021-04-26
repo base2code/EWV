@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		703088DF263454F500B87978 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703088DE263454F500B87978 /* AppDelegate.swift */; };
 		703088E1263454F500B87978 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 703088E0263454F500B87978 /* art.scnassets */; };
-		703088E3263454F500B87978 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703088E2263454F500B87978 /* ViewController.swift */; };
 		703088E6263454F500B87978 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 703088E4263454F500B87978 /* Main.storyboard */; };
 		703088E8263454F800B87978 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 703088E7263454F800B87978 /* Assets.xcassets */; };
 		703088EB263454F800B87978 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 703088E9263454F800B87978 /* LaunchScreen.storyboard */; };
 		703088F6263454FA00B87978 /* EWVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703088F5263454FA00B87978 /* EWVTests.swift */; };
 		70308901263454FA00B87978 /* EWVUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70308900263454FA00B87978 /* EWVUITests.swift */; };
+		709941FE2637304200D72CC9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709941FD2637304200D72CC9 /* SettingsViewController.swift */; };
+		70994203263730C800D72CC9 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70994202263730C800D72CC9 /* ARViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +39,6 @@
 		703088DB263454F500B87978 /* EWV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EWV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		703088DE263454F500B87978 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		703088E0263454F500B87978 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		703088E2263454F500B87978 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		703088E5263454F500B87978 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		703088E7263454F800B87978 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		703088EA263454F800B87978 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +49,8 @@
 		703088FC263454FA00B87978 /* EWVUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EWVUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70308900263454FA00B87978 /* EWVUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EWVUITests.swift; sourceTree = "<group>"; };
 		70308902263454FA00B87978 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		709941FD2637304200D72CC9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		70994202263730C800D72CC9 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +103,12 @@
 			children = (
 				703088DE263454F500B87978 /* AppDelegate.swift */,
 				703088E0263454F500B87978 /* art.scnassets */,
-				703088E2263454F500B87978 /* ViewController.swift */,
 				703088E4263454F500B87978 /* Main.storyboard */,
 				703088E7263454F800B87978 /* Assets.xcassets */,
 				703088E9263454F800B87978 /* LaunchScreen.storyboard */,
 				703088EC263454F800B87978 /* Info.plist */,
+				709941FD2637304200D72CC9 /* SettingsViewController.swift */,
+				70994202263730C800D72CC9 /* ARViewController.swift */,
 			);
 			path = EWV;
 			sourceTree = "<group>";
@@ -259,8 +262,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				703088E3263454F500B87978 /* ViewController.swift in Sources */,
 				703088DF263454F500B87978 /* AppDelegate.swift in Sources */,
+				709941FE2637304200D72CC9 /* SettingsViewController.swift in Sources */,
+				70994203263730C800D72CC9 /* ARViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

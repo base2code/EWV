@@ -1,28 +1,28 @@
 //
-//  ViewController.swift
-//  artest
+//  ARViewController.swift
+//  EWV
 //
-//  Created by Niklas Grenningloh on 21.04.21.
+//  Created by Niklas Grenningloh on 26.04.21.
 //
 
 import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
-    
+class ARViewController: UIViewController, ARSCNViewDelegate {
+
     @IBOutlet var sceneView: ARSCNView!
     let configuration = ARWorldTrackingConfiguration()
     
     var timer = Timer()
     
-    @IBOutlet weak var Amplitude: UISlider!
-    @IBOutlet weak var Periode: UISlider!
-    
-    
+    var amplitudevalue = 1.0
+    var periodeValue = 1.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        removeNodes()
         
         // Set the view's delegate
         sceneView.delegate = self
@@ -30,7 +30,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
+        // sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
         
         startTimer()
 //        showNodes()
@@ -40,19 +40,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Set the scene to the view
         //sceneView.scene = scene
         
+        print("Start: " + String(amplitudevalue))
         
         
+        
     }
-    @IBOutlet weak var AmpValue: UILabel!
-    @IBOutlet weak var PerValue: UILabel!
-    
-    @IBAction func AmpChanged(_ sender: Any) {
-        AmpValue.text = String(Amplitude.value.rounded())
-    }
-    @IBAction func PerChanged(_ sender: Any) {
-        PerValue.text = String(Periode.value.rounded())
-    }
-    
     
     @objc func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(spawnNewNodes), userInfo: nil, repeats: true)
@@ -80,20 +72,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let node = SCNNode();
                 node.geometry = SCNSphere(radius: 0.01)
                 node.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
-                let tmp1 = Double((Double(Periode.value) * 1.0 / 2.5) + x)
-                let tmp2 = Double((Double(Periode.value) * 1.0 / 2.5) + z)
+                let tmp1 = Double((Double(periodeValue) * 1.0 / 2.5) + x)
+                let tmp2 = Double((Double(periodeValue) * 1.0 / 2.5) + z)
                 node.position = SCNVector3(Double(0), calculateY(x: Double(tmp1), z: Double(tmp2)), Double(0))
                 
                 var z1 = 0.0
                 if z < 0 {
-                    z1 = Double(Periode.value * 1.0 / 2.5) * 5 * z * -1;
+                    z1 = Double(periodeValue * 1.0 / 2.5) * 5 * z * -1;
                 }else if z > 0{
-                    z1 = Double(Periode.value * 1.0 / 2.5) * 5 * z;
+                    z1 = Double(periodeValue * 1.0 / 2.5) * 5 * z;
                 }
                 
 //                let z1 = Double(Periode.value * 1.0 / 2.5) * z
                 
-                let x1 = Double(Periode.value * 1.0 / 2.5)
+                let x1 = Double(periodeValue * 1.0 / 2.5)
 //                let x1 = 2 * Double(Periode.value) * Double(step) + x
 //                if x < 0 {
 //                    x1 = 32 * x * -1
@@ -139,7 +131,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let sqrt1 = (sqrt / 0.25) / 1
         let f = (2 * Double.pi * sqrt1)
         // f.round()
-        let i = Double(Amplitude.value/10) * sin(f) * 1
+        let i = Double(amplitudevalue / 10) * sin(f) * 1
         return (i / sqrt)
     }
     
@@ -189,4 +181,5 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override open var shouldAutorotate: Bool {
         return false
     }
+
 }
