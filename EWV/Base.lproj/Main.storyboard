@@ -68,8 +68,7 @@
                                     <color key="titleShadowColor" systemColor="systemBlueColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="onARStart:" destination="gWp-RV-Zd0" eventType="touchUpInside" id="Rad-PV-3AH"/>
-                                    <action selector="startARbutton:" destination="Vmi-ug-ALF" eventType="touchUpInside" id="tc5-33-hS9"/>
+                                    <action selector="startARButton:" destination="Vmi-ug-ALF" eventType="touchUpInside" id="Sn4-RX-6GE"/>
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="Uze-X4-RiD">
@@ -120,15 +119,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="fH4-yl-RcN"/>
                     <connections>
-                        <outlet property="AmpLabel" destination="YMc-ON-5Hh" id="l5F-cK-hnD"/>
-                        <outlet property="Amplitude" destination="Uze-X4-RiD" id="e85-Eu-SeD"/>
-                        <outlet property="PerLabel" destination="AIA-QO-z6O" id="iF4-4L-ul4"/>
-                        <outlet property="Periode" destination="3bi-rP-loy" id="NPF-UO-Spa"/>
+                        <outlet property="ampText" destination="YMc-ON-5Hh" id="a4R-HP-OBE"/>
+                        <outlet property="ampValue" destination="Uze-X4-RiD" id="Yyg-Fl-ORf"/>
+                        <outlet property="perText" destination="AIA-QO-z6O" id="6Vg-wd-ige"/>
+                        <outlet property="perValue" destination="3bi-rP-loy" id="dDe-fV-dYb"/>
                         <segue destination="1Ko-pT-b2f" kind="presentation" identifier="variables" id="6Ob-A1-PjC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lZl-pc-qel" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="gWp-RV-Zd0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="989.60000000000002" y="79.610194902548727"/>
         </scene>
