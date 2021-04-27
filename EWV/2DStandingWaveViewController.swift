@@ -18,8 +18,8 @@ class _DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     
     var amplitudevalue = Double()
     var periodeValue = Double()
-    var distance = 0.3
-    var radius = 0.001
+    var distance = Double()
+    var radius = Double()
 
     var timing = 1
     

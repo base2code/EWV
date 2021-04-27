@@ -11,6 +11,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBOutlet weak var ampValue: UISlider!
     @IBOutlet weak var perValue: UISlider!
+    @IBOutlet weak var disValue: UISlider!
+    @IBOutlet weak var radValue: UISlider!
     
     var pickerData: [String] = [String]()
     
@@ -27,9 +29,13 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBOutlet weak var ampText: UILabel!
     @IBOutlet weak var perText: UILabel!
+    @IBOutlet weak var disText: UILabel!
+    @IBOutlet weak var radText: UILabel!
     
     var periode = 1.0
     var amplitude = 1.0
+    var distance = 0.3
+    var radius = 0.001
     
     @IBAction func onAmpChange(_ sender: Any) {
         if ampValue.value != 0 {
@@ -47,6 +53,23 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         }
     }
     
+    @IBAction func onDisChange(_ sender: Any) {
+        if disValue.value != 0 {
+            disText.text = String(disValue.value.rounded())
+        }else{
+            disText.text = "0.0"
+        }
+    }
+    
+    @IBAction func onRadChange(_ sender: Any) {
+        if radValue.value != 0 {
+            radText.text = String(disValue.value.rounded())
+        }else{
+            radText.text = "0.000"
+        }
+    }
+    
+    
     @IBOutlet weak var Picker: UIPickerView!
 //    var selected = 1;
     
@@ -57,6 +80,9 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBAction func startARButton(_ sender: Any) {
         self.periode = Double(perValue.value)
         self.amplitude = Double(ampValue.value)
+        self.distance = Double(disValue.value)
+        self.radius = Double(radValue.value)
+        
         let selected = Picker.selectedRow(inComponent: 0)
         if (selected == 0){
             performSegue(withIdentifier: "3dvariables", sender: sender)
@@ -76,6 +102,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             vc.amplitudevalue = amplitude * 1.0
             print(String(amplitude) + " " + String(amplitude * 1.0 / 100))
             vc.periodeValue = periode * 1.0 / 10
+            vc.distance = distance
+            vc.radius = radius
         }
         
     }
