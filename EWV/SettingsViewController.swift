@@ -48,37 +48,34 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     @IBOutlet weak var Picker: UIPickerView!
-    var selected = 1;
+//    var selected = 1;
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // 1 - 3D Wave
-        // 2 - 2D Standing wave
-            selected = row
-        }
+    
+    // 0 - 3D Wave
+    // 1 - 2D Standing wave
     
     @IBAction func startARButton(_ sender: Any) {
         self.periode = Double(perValue.value)
         self.amplitude = Double(ampValue.value)
-        if (selected == 1){
-            print("1.1")
+        let selected = Picker.selectedRow(inComponent: 0)
+        if (selected == 0){
             performSegue(withIdentifier: "3dvariables", sender: sender)
-        }else if (selected == 2){
-            print("1.2")
+        }else if (selected == 1){
             performSegue(withIdentifier: "2dStandingWaveVariables", sender: sender)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if selected == 1 {
-            print("1")
+        let selected = Picker.selectedRow(inComponent: 0)
+        if selected == 0 {
             let vc = segue.destination as! ThreeDARViewController
-            vc.amplitudevalue = amplitude
-            vc.periodeValue = periode
-        }else if selected == 2 {
-            print("2")
+            vc.amplitudevalue = amplitude / 10
+            vc.periodeValue = periode / 10
+        }else if selected == 1 {
             let vc = segue.destination as! _DStandingWaveViewController
-            vc.amplitudevalue = amplitude
-            vc.periodeValue = periode
+            vc.amplitudevalue = amplitude * 1.0
+            print(String(amplitude) + " " + String(amplitude * 1.0 / 100))
+            vc.periodeValue = periode * 1.0 / 10
         }
         
     }
