@@ -55,7 +55,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBAction func onDisChange(_ sender: Any) {
         if disValue.value != 0 {
-            disText.text = String(disValue.value.rounded())
+            disText.text = String(disValue.value)
         }else{
             disText.text = "0.0"
         }
@@ -63,7 +63,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBAction func onRadChange(_ sender: Any) {
         if radValue.value != 0 {
-            radText.text = String(disValue.value.rounded())
+            radText.text = String(radValue.value)
         }else{
             radText.text = "0.000"
         }
