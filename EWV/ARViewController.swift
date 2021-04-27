@@ -92,7 +92,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
 //                }else if x > 0 {
 //                    x1 = 32 * x
 //                }
-                // hallo
+                
                 var move = SCNAction()
 
                 if z <= 0 {
