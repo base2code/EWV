@@ -23,7 +23,8 @@ class _DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
 
     var timing = 1
     
-    var step = 0.0
+    var step = 1.0
+    var startstep = 1.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +58,8 @@ class _DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
         }
         
         nodesArray.removeAll()
-        step = 0.0
+        step = 1.0
+        startstep = 1.0
     }
     
     var nodesArray: [SCNNode] = []
@@ -80,20 +82,28 @@ class _DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     
     @objc func calculateAllNodes() {
         for node in nodesArray {
-            let y = calculateY(x: (Double(node.position.x))) * sin(step) - Double(node.position.y)
+            let y = calculateY(x: (Double(node.position.x))) * step - Double(node.position.y)
             let action = SCNAction.moveBy(x: CGFloat(0), y: CGFloat(y), z: 0, duration: TimeInterval(timing))
             node.runAction(action)
                                         
         }
-        step += radius * 100
-    
+        calculateStep()
+        startstep += 0.005
     }
     
     @objc func calculateY(x: Double) -> Double {
         return ((sin(x * 10 * 1.0 / (periodeValue))) * amplitudevalue) / 10
     }
 
-    
+    @objc func calculateStep() {
+        // Picture of function: /media/triangle_function.jpeg
+        let p1 = 2 * amplitudevalue / Double.pi
+        let p2 = ((2 * Double.pi) / periodeValue) * startstep
+        let p3 = sin(p2)
+        let p4 = asin(p3)
+        step = p1 * p4
+        print(step)
+    }
 
     /*
     // MARK: - Navigation
