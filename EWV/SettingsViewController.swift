@@ -23,7 +23,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         self.Picker.delegate = self
         self.Picker.dataSource = self
         
-        pickerData = ["3D Wave", "2D standing wave", "3", "4"]
+        pickerData = ["3D Wave", "2D standing wave", "3D standing wave", "4"]
         
         //Looks for single or multiple taps.
              let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -37,8 +37,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         periode = 10.0
         amplitude = 10.0
         distance = 0.3
-        radius = 0.001
-        speed = 1.0
+        radius = 1.0
+        speed = 100
         
     }
     
@@ -54,8 +54,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var periode = 10.0
     var amplitude = 10.0
     var distance = 0.3
-    var radius = 0.001
-    var speed = 1.0
+    var radius = 1.0
+    var speed = 100.0
     
     @IBOutlet weak var Picker: UIPickerView!
 //    var selected = 1;
@@ -86,6 +86,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             performSegue(withIdentifier: "3dvariables", sender: sender)
         }else if (selected == 1){
             performSegue(withIdentifier: "2dStandingWaveVariables", sender: sender)
+        }else if (selected == 2){
+            performSegue(withIdentifier: "3dStandingWaveVariables", sender: sender)
         }
     }
     
@@ -96,13 +98,24 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             vc.amplitudevalue = amplitude / 10
             vc.periodeValue = periode / 10
         }else if selected == 1 {
-            let vc = segue.destination as! _DStandingWaveViewController
+            let vc = segue.destination as! _2DStandingWaveViewController
             vc.amplitudevalue = amplitude / 10
             vc.periodeValue = periode / 50
             vc.distance = distance
             vc.radius = radius / 1000
             vc.showAnchor = anchorSwitch.isOn
             vc.timing = speed / 100
+            print("Timing: " + String(vc.timing))
+//            vc.timer.invalidate()
+        }else if selected == 2 {
+            let vc = segue.destination as! _3DStandinWaveViewController
+            vc.amplitudevalue = amplitude / 10
+            vc.periodeValue = periode / 50
+            vc.distance = distance
+            vc.radius = radius / 1000
+            vc.showAnchor = anchorSwitch.isOn
+            vc.timing = speed * 1.0 / 100
+            print("Timing: " + String(vc.timing))
             vc.timer.invalidate()
         }
         

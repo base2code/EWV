@@ -1,16 +1,16 @@
 //
-//  2DStandingWaveViewController.swift
+//  3DStandinWaveViewController.swift
 //  EWV
 //
-//  Created by Niklas Grenningloh on 27.04.21.
+//  Created by Niklas Grenningloh on 28.04.21.
 //
 
 import UIKit
 import ARKit
 import SceneKit
 
-class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
-    
+class _3DStandinWaveViewController: UIViewController, ARSCNViewDelegate {
+
     @IBOutlet weak var sceneView: ARSCNView!
     let configuration = ARWorldTrackingConfiguration()
     
@@ -23,7 +23,7 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     
     var showAnchor = Bool()
 
-    var timing = Double()
+    var timing = 1.0
     
     var step = 1.0
     var startstep = 1.0
@@ -42,6 +42,8 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
         if showAnchor {
             sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
         }
+        
+        print(amplitudevalue)
         
 //        startTimer()
         spawnNodesWithAnimation()
@@ -68,23 +70,29 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     
     @objc func spawnNodesWithAnimation() {
         for x in stride(from: 0.0, to: distance, by: radius) {
-            let node = SCNNode();
-            node.geometry = SCNSphere(radius: CGFloat(radius))
-            node.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
-            node.position = SCNVector3(x, calculateY(x: Double(x)), Double(0))
-            
-            nodesArray.append(node)
-            
-            sceneView.scene.rootNode.addChildNode(node)
+            for z in stride(from: 0.0, to: distance, by: radius){
+                let node = SCNNode();
+                node.geometry = SCNSphere(radius: CGFloat(radius))
+                node.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
+                node.position = SCNVector3(x, calculateY(x: Double(pythagoras(a: x, b: z))), z)
+                
+                nodesArray.append(node)
+                
+                sceneView.scene.rootNode.addChildNode(node)
+            }
             
         }
         
         Timer.scheduledTimer(timeInterval: TimeInterval(timing), target: self, selector: #selector(calculateAllNodes), userInfo: nil, repeats: true)
     }
     
+    @objc func pythagoras(a: Double, b: Double) -> Double {
+        return (a * a + b * b).squareRoot()
+    }
+    
     @objc func calculateAllNodes() {
         for node in nodesArray {
-            let y = calculateY(x: (Double(node.position.x))) * step - Double(node.position.y)
+            let y = calculateY(x: (Double(pythagoras(a: Double(node.position.x), b: Double(node.position.z))))) * step - Double(node.position.y)
             let action = SCNAction.moveBy(x: CGFloat(0), y: CGFloat(y), z: 0, duration: TimeInterval(timing))
             node.runAction(action)
                                         

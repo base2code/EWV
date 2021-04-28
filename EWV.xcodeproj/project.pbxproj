@@ -15,6 +15,7 @@
 		703088F6263454FA00B87978 /* EWVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703088F5263454FA00B87978 /* EWVTests.swift */; };
 		70308901263454FA00B87978 /* EWVUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70308900263454FA00B87978 /* EWVUITests.swift */; };
 		70941973263865F9001BFA7A /* 2DStandingWaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70941972263865F9001BFA7A /* 2DStandingWaveViewController.swift */; };
+		709419752639DC85001BFA7A /* 3DStandinWaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709419742639DC85001BFA7A /* 3DStandinWaveViewController.swift */; };
 		70994203263730C800D72CC9 /* 3DARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70994202263730C800D72CC9 /* 3DARViewController.swift */; };
 		7099421E26374EDB00D72CC9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7099421D26374EDB00D72CC9 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		70308900263454FA00B87978 /* EWVUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EWVUITests.swift; sourceTree = "<group>"; };
 		70308902263454FA00B87978 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70941972263865F9001BFA7A /* 2DStandingWaveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2DStandingWaveViewController.swift; sourceTree = "<group>"; };
+		709419742639DC85001BFA7A /* 3DStandinWaveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 3DStandinWaveViewController.swift; sourceTree = "<group>"; };
 		70994202263730C800D72CC9 /* 3DARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 3DARViewController.swift; sourceTree = "<group>"; };
 		7099421D26374EDB00D72CC9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,6 +114,7 @@
 				70994202263730C800D72CC9 /* 3DARViewController.swift */,
 				7099421D26374EDB00D72CC9 /* SettingsViewController.swift */,
 				70941972263865F9001BFA7A /* 2DStandingWaveViewController.swift */,
+				709419742639DC85001BFA7A /* 3DStandinWaveViewController.swift */,
 			);
 			path = EWV;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				703088DF263454F500B87978 /* AppDelegate.swift in Sources */,
+				709419752639DC85001BFA7A /* 3DStandinWaveViewController.swift in Sources */,
 				70941973263865F9001BFA7A /* 2DStandingWaveViewController.swift in Sources */,
 				70994203263730C800D72CC9 /* 3DARViewController.swift in Sources */,
 				7099421E26374EDB00D72CC9 /* SettingsViewController.swift in Sources */,
