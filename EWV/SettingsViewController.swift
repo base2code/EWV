@@ -9,10 +9,11 @@ import UIKit
 
 class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    @IBOutlet weak var ampValue: UISlider!
-    @IBOutlet weak var perValue: UISlider!
-    @IBOutlet weak var disValue: UISlider!
-    @IBOutlet weak var radValue: UISlider!
+    @IBOutlet weak var ampText: UITextField!
+    @IBOutlet weak var perText: UITextField!
+    @IBOutlet weak var disText: UITextField!
+    @IBOutlet weak var radText: UITextField!
+    @IBOutlet weak var speText: UITextField!
     
     var pickerData: [String] = [String]()
     
@@ -23,54 +24,38 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         self.Picker.dataSource = self
         
         pickerData = ["3D Wave", "2D standing wave", "3", "4"]
+        
+        //Looks for single or multiple taps.
+             let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+
+            //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+            //tap.cancelsTouchesInView = false
+
+            view.addGestureRecognizer(tap)
 
         // Do any additional setup after loading the view.
+        periode = 10.0
+        amplitude = 10.0
+        distance = 0.3
+        radius = 0.001
+        speed = 1.0
+        
     }
     
-    @IBOutlet weak var ampText: UILabel!
-    @IBOutlet weak var perText: UILabel!
-    @IBOutlet weak var disText: UILabel!
-    @IBOutlet weak var radText: UILabel!
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
+
     
     @IBOutlet weak var anchorSwitch: UISwitch!
     
-    var periode = 1.0
-    var amplitude = 1.0
+    var periode = 10.0
+    var amplitude = 10.0
     var distance = 0.3
     var radius = 0.001
-    
-    @IBAction func onAmpChange(_ sender: Any) {
-        if ampValue.value != 0 {
-            ampText.text = String(ampValue.value.rounded())
-        }else{
-            ampText.text = "0.0"
-        }
-    }
-    
-    @IBAction func onPerChange(_ sender: Any) {
-        if perValue.value != 0 {
-            perText.text = String(perValue.value.rounded())
-        }else{
-            perText.text = "0.0"
-        }
-    }
-    
-    @IBAction func onDisChange(_ sender: Any) {
-        if disValue.value != 0 {
-            disText.text = String(disValue.value)
-        }else{
-            disText.text = "0.0"
-        }
-    }
-    
-    @IBAction func onRadChange(_ sender: Any) {
-        if radValue.value != 0 {
-            radText.text = String(radValue.value)
-        }else{
-            radText.text = "0.000"
-        }
-    }
-    
+    var speed = 1.0
     
     @IBOutlet weak var Picker: UIPickerView!
 //    var selected = 1;
@@ -80,10 +65,21 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     // 1 - 2D Standing wave
     
     @IBAction func startARButton(_ sender: Any) {
-        self.periode = Double(perValue.value)
-        self.amplitude = Double(ampValue.value)
-        self.distance = Double(disValue.value)
-        self.radius = Double(radValue.value)
+        if let per = Double(perText.text!) {
+            self.periode = per
+        }
+        if let amp = Double(ampText.text!) {
+            self.amplitude = amp
+        }
+        if let dis = Double(disText.text!) {
+            self.distance = dis
+        }
+        if let rad = Double(radText.text!) {
+            self.radius = rad
+        }
+        if let spe = Double(speText.text!) {
+            self.speed = spe
+        }
         
         let selected = Picker.selectedRow(inComponent: 0)
         if (selected == 0){
@@ -101,12 +97,13 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             vc.periodeValue = periode / 10
         }else if selected == 1 {
             let vc = segue.destination as! _DStandingWaveViewController
-            vc.amplitudevalue = amplitude * 1.0
-            print(String(amplitude) + " " + String(amplitude * 1.0 / 100))
-            vc.periodeValue = periode * 1.0 / 10
+            vc.amplitudevalue = amplitude / 10
+            vc.periodeValue = periode / 50
             vc.distance = distance
-            vc.radius = radius
+            vc.radius = radius / 1000
             vc.showAnchor = anchorSwitch.isOn
+            vc.timing = speed / 100
+            vc.timer.invalidate()
         }
         
     }

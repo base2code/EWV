@@ -23,7 +23,7 @@ class _DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     
     var showAnchor = Bool()
 
-    var timing = 1
+    var timing = 1.0
     
     var step = 1.0
     var startstep = 1.0
