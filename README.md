@@ -13,5 +13,5 @@ It should look similar to this simulation in GeoGebra:
 Animated:
 ![Goal Geogebra](media/goal_geogebra_animated.gif)
 
-## Notice
+## Note
 This is a school project in physics
