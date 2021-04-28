@@ -20,6 +20,8 @@ class _DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     var periodeValue = Double()
     var distance = Double()
     var radius = Double()
+    
+    var showAnchor = Bool()
 
     var timing = 1
     
@@ -37,7 +39,9 @@ class _DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
+        if showAnchor {
+            sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
+        }
         
         print(amplitudevalue)
         

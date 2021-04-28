@@ -160,6 +160,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zz4-WT-GBv">
+                                <rect key="frame" x="305" y="398" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Show world anchor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAi-2U-4DK">
+                                <rect key="frame" x="46" y="400" width="182" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fmC-Pb-Qe8"/>
                         <color key="backgroundColor" systemColor="systemGray2Color"/>
@@ -169,6 +180,7 @@
                         <outlet property="Picker" destination="sgP-mx-1DJ" id="0W5-st-7NV"/>
                         <outlet property="ampText" destination="YMc-ON-5Hh" id="a4R-HP-OBE"/>
                         <outlet property="ampValue" destination="Uze-X4-RiD" id="Yyg-Fl-ORf"/>
+                        <outlet property="anchorSwitch" destination="zz4-WT-GBv" id="gSD-X1-KOZ"/>
                         <outlet property="disText" destination="OxX-Tt-q2p" id="WEQ-dC-0AU"/>
                         <outlet property="disValue" destination="bVh-g5-cNE" id="6S2-LC-Lkd"/>
                         <outlet property="perText" destination="AIA-QO-z6O" id="6Vg-wd-ige"/>

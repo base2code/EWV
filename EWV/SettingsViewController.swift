@@ -32,6 +32,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var disText: UILabel!
     @IBOutlet weak var radText: UILabel!
     
+    @IBOutlet weak var anchorSwitch: UISwitch!
+    
     var periode = 1.0
     var amplitude = 1.0
     var distance = 0.3
@@ -104,6 +106,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             vc.periodeValue = periode * 1.0 / 10
             vc.distance = distance
             vc.radius = radius
+            vc.showAnchor = anchorSwitch.isOn
         }
         
     }
