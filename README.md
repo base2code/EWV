@@ -1,5 +1,5 @@
 # EWV
-Electromagnetic wave visualization using Apple ARKit
+Electromagnetic wave simulation using Apple ARKit
 
 ## In development
 
