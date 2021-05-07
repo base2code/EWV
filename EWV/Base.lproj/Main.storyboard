@@ -221,18 +221,26 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </arscnView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Messwerte (Bitte klicke auf einen Punkt)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJN-Dr-PmJ">
+                                <rect key="frame" x="16" y="15" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oYg-zO-msN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="ghw-W3-zC0"/>
                     <connections>
+                        <outlet property="measurement" destination="bJN-Dr-PmJ" id="d4g-Ns-75C"/>
                         <outlet property="sceneView" destination="XRt-xm-pIK" id="6P2-3Y-Udn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HmH-Wz-Qvn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1993" y="431"/>
+            <point key="canvasLocation" x="1992.8" y="430.43478260869568"/>
         </scene>
         <!--3D Standing Wave AR View-->
         <scene sceneID="RJa-RB-w4Q">

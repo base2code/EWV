@@ -106,7 +106,6 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             vc.showAnchor = anchorSwitch.isOn
             vc.timing = speed / 100
             print("Timing: " + String(vc.timing))
-//            vc.timer.invalidate()
         }else if selected == 2 {
             let vc = segue.destination as! _3DStandinWaveViewController
             vc.amplitudevalue = amplitude / 10
@@ -115,8 +114,6 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             vc.radius = radius / 1000
             vc.showAnchor = anchorSwitch.isOn
             vc.timing = speed * 1.0 / 100
-            print("Timing: " + String(vc.timing))
-            vc.timer.invalidate()
         }
         
     }

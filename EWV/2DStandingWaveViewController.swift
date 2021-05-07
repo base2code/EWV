@@ -105,6 +105,28 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
         let p4 = asin(p3)
         step = p1 * p4
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first as! UITouch
+        if(touch.view == self.sceneView){
+            print("touch working")
+            let viewTouchLocation:CGPoint = touch.location(in: sceneView)
+            guard let result = sceneView.hitTest(viewTouchLocation, options: nil).first else {
+                return
+            }
+            if nodesArray.contains(result.node) {
+                print("match")
+                measurement.text = getExperimentCurrent(node: result.node)
+            }
+
+        }
+    }
+    @IBOutlet weak var measurement: UILabel!
+    
+    @objc func getExperimentCurrent(node: SCNNode) -> String {
+        
+        return "Hallo"
+    }
 
     /*
     // MARK: - Navigation
