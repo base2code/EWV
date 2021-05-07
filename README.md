@@ -1,5 +1,5 @@
 # EWV
-Electromagnetic wave visualization using Apple ARKit
+Electromagnetic wave simulation using Apple ARKit
 
 ## In development
 
@@ -13,5 +13,5 @@ It should look similar to this simulation in GeoGebra:
 Animated:
 ![Goal Geogebra](media/goal_geogebra_animated.gif)
 
-## Notice
+## Note
 This is a school project in physics
