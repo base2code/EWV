@@ -1,7 +1,8 @@
 # EWV
-Electromagnetic wave simulation using Apple ARKit
+Simulation von elektromagnetischen Wellen mit Hilfe des Apple ARKits
 
-## In development
+## Projekt noch in der Programmierung
+Dieses Projekt befindet sich derzeit noch in der Programmierung und es können jederzeit neue Funktionen hinzugefügt und alte Fuktionen gelöscht werden.
 
-## Note
-This is a school project in physics
+## Wichtig
+Dies ist ein Schulprojekt, deswegen können PRs, momentan nicht bearbeitet werden.
