@@ -1,17 +1,8 @@
 # EWV
-Electromagnetic wave simulation using Apple ARKit
+Simulation von elektromagnetischen Wellen mit Hilfe des Apple ARKits
 
-## In development
+## Projekt noch in der Programmierung
+Dieses Projekt befindet sich derzeit noch in der Programmierung und es können jederzeit neue Funktionen hinzugefügt und alte Fuktionen gelöscht werden.
 
-# Goal of the app
-The goal is to create an app which shows the "way" of an electromagnetic wave (especially microwaves).
-
-It should look similar to this simulation in GeoGebra:
-
-![Goal Geogebra](media/goal_geogebra.jpg)
-
-Animated:
-![Goal Geogebra](media/goal_geogebra_animated.gif)
-
-## Note
-This is a school project in physics
+## Wichtig
+Dies ist ein Schulprojekt, deswegen können PRs, momentan nicht bearbeitet werden.
