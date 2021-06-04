@@ -107,15 +107,13 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first as! UITouch
+        let touch = touches.first!
         if(touch.view == self.sceneView){
-            print("touch working")
             let viewTouchLocation:CGPoint = touch.location(in: sceneView)
             guard let result = sceneView.hitTest(viewTouchLocation, options: nil).first else {
                 return
             }
             if nodesArray.contains(result.node) {
-                print("match")
                 measurement.text = getExperimentCurrent(node: result.node)
             }
 
@@ -124,7 +122,7 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var measurement: UILabel!
     
     @objc func getExperimentCurrent(node: SCNNode) -> String {
-        
+        // TODO: Insert formular to calculate voltage when measured in experiment
         return "Hallo"
     }
 
