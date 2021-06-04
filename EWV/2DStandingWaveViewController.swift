@@ -125,6 +125,13 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
         // TODO: Insert formular to calculate voltage when measured in experiment
         return "Hallo"
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Pause the view's session
+        sceneView.session.pause()
+    }
 
     /*
     // MARK: - Navigation
@@ -135,5 +142,26 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    func session(_ session: ARSession, didFailWithError error: Error) {
+        // Present an error message to the user
+        
+    }
+    
+    func sessionWasInterrupted(_ session: ARSession) {
+        // Inform the user that the session has been interrupted, for example, by presenting an overlay
+        
+    }
+    
+    func sessionInterruptionEnded(_ session: ARSession) {
+        // Reset tracking and/or remove existing anchors if consistent tracking is required
+        
+    }
+    
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+
 
 }
