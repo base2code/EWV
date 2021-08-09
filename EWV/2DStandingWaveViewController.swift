@@ -28,6 +28,91 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     var step = 1.0
     var startstep = 1.0
     
+    @IBOutlet weak var xmove: UISlider!
+    @IBOutlet weak var ymove: UISlider!
+    @IBOutlet weak var zmove: UISlider!
+    
+    var xmovealready = 0.0;
+    
+    @IBAction func xmoveaction(_ sender: Any) {
+        for node in nodesArray {
+            let action = SCNAction.moveBy(x: CGFloat(Double(xmove.value) / 100.0 - xmovealready), y: CGFloat(0), z: CGFloat(0), duration: TimeInterval(timing))
+            node.runAction(action)
+        }
+        xmovealready = Double(xmove.value / 100.0)
+    }
+    
+    var zmovealready = 0.0;
+    
+    @IBAction func zmoveaction(_ sender: Any) {
+        for node in nodesArray {
+            let action = SCNAction.moveBy(x: CGFloat(0), y: CGFloat(0), z: CGFloat(Double(zmove.value) / 100.0 - zmovealready), duration: TimeInterval(timing))
+            node.runAction(action)
+        }
+        zmovealready = Double(zmove.value / 100.0)
+    }
+    
+    var originArray: [SCNNode] = []
+    @IBOutlet weak var originButton: UISwitch!
+    
+    @IBAction func originAction(_ sender: Any) {
+        if originButton.isOn {
+            var x0 = SCNVector3();
+            x0.x = xmove.value / 100.0
+            x0.y = ymove.value / 100.0
+            x0.z = zmove.value / 100.0
+            
+            var x1 = SCNVector3();
+            x1.x = xmove.value / 100.0
+            x1.y = ymove.value / 100.0
+            x1.z = zmove.value / 100.0
+            
+            x1.x = xmove.value / 100.0 + Float(0.5)
+            let xdir = lineBetweenNodes(positionA: x0, positionB: x1, inScene: sceneView.scene, color: UIColor.red)
+            
+            x1.x = xmove.value / 100.0
+            x1.y = ymove.value / 100.0 + Float(0.5)
+            let ydir = lineBetweenNodes(positionA: x0, positionB: x1, inScene: sceneView.scene, color: UIColor.green)
+            
+            x1.y = ymove.value / 100.0
+            x1.z = zmove.value / 100.0 + Float(0.5)
+            let zdir = lineBetweenNodes(positionA: x0, positionB: x1, inScene: sceneView.scene, color: UIColor.blue)
+            
+            
+            print(ymove.value / 100.0)
+            
+            sceneView.scene.rootNode.addChildNode(xdir)
+            sceneView.scene.rootNode.addChildNode(ydir)
+            sceneView.scene.rootNode.addChildNode(zdir)
+            
+            originArray.append(xdir)
+            originArray.append(ydir)
+            originArray.append(zdir)
+        }else{
+            for node in originArray {
+                node.removeFromParentNode()
+            }
+        }
+    }
+    
+    func lineBetweenNodes(positionA: SCNVector3, positionB: SCNVector3, inScene: SCNScene, color: UIColor) -> SCNNode {
+            let vector = SCNVector3(positionA.x - positionB.x, positionA.y - positionB.y, positionA.z - positionB.z)
+            let distance = sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z)
+            let midPosition = SCNVector3 (x:(positionA.x + positionB.x) / 2, y:(positionA.y + positionB.y) / 2, z:(positionA.z + positionB.z) / 2)
+
+            let lineGeometry = SCNCylinder()
+            lineGeometry.radius = 0.002
+            lineGeometry.height = CGFloat(distance)
+            lineGeometry.radialSegmentCount = 5
+            lineGeometry.firstMaterial!.diffuse.contents = color
+
+            let lineNode = SCNNode(geometry: lineGeometry)
+            lineNode.position = midPosition
+            lineNode.look (at: positionB, up: inScene.rootNode.worldUp, localFront: lineNode.worldUp)
+            return lineNode
+        }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -84,8 +169,8 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     
     @objc func calculateAllNodes() {
         for node in nodesArray {
-            let y = calculateY(x: (Double(node.position.x))) * step - Double(node.position.y)
-            let action = SCNAction.moveBy(x: CGFloat(0), y: CGFloat(y), z: 0, duration: TimeInterval(timing))
+            let y = calculateY(x: ((Double(node.position.x))) - xmovealready) * step - Double(node.position.y)
+            let action = SCNAction.moveBy(x: CGFloat(0), y: CGFloat(y) + CGFloat((ymove.value / 100.0)), z: 0, duration: TimeInterval(timing))
             node.runAction(action)
                                         
         }
