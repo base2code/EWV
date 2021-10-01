@@ -9,10 +9,8 @@ import UIKit
 
 class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    @IBOutlet weak var ampText: UITextField!
-    @IBOutlet weak var perText: UITextField!
+    @IBOutlet weak var frqText: UITextField!
     @IBOutlet weak var disText: UITextField!
-    @IBOutlet weak var radText: UITextField!
     @IBOutlet weak var speText: UITextField!
     
     var pickerData: [String] = [String]()
@@ -34,12 +32,6 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             view.addGestureRecognizer(tap)
 
         // Do any additional setup after loading the view.
-        periode = 10.0
-        amplitude = 10.0
-        distance = 0.3
-        radius = 1.0
-        speed = 100
-        
     }
     
     @objc func dismissKeyboard() {
@@ -51,10 +43,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBOutlet weak var anchorSwitch: UISwitch!
     
-    var periode = 10.0
-    var amplitude = 10.0
+    var frequency = 10.0
     var distance = 0.3
-    var radius = 1.0
     var speed = 100.0
     
     @IBOutlet weak var Picker: UIPickerView!
@@ -65,17 +55,11 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     // 1 - 2D Standing wave
     
     @IBAction func startARButton(_ sender: Any) {
-        if let per = Double(perText.text!) {
-            self.periode = per
-        }
-        if let amp = Double(ampText.text!) {
-            self.amplitude = amp
+        if let frq = Double(frqText.text!) {
+            self.frequency = frq
         }
         if let dis = Double(disText.text!) {
             self.distance = dis
-        }
-        if let rad = Double(radText.text!) {
-            self.radius = rad
         }
         if let spe = Double(speText.text!) {
             self.speed = spe
@@ -95,23 +79,18 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         let selected = Picker.selectedRow(inComponent: 0)
         if selected == 0 {
             let vc = segue.destination as! ThreeDARViewController
-            vc.amplitudevalue = amplitude / 10
-            vc.periodeValue = periode / 10
+            vc.frequencyValue = frequency
         }else if selected == 1 {
             let vc = segue.destination as! _2DStandingWaveViewController
-            vc.amplitudevalue = amplitude / 10
-            vc.periodeValue = periode / 50
+            vc.frequencyValue = frequency
             vc.distance = distance
-            vc.radius = radius / 1000
             vc.showAnchor = anchorSwitch.isOn
-            vc.timing = speed / 100
+            vc.timing = speed / 500
             print("Timing: " + String(vc.timing))
         }else if selected == 2 {
             let vc = segue.destination as! _3DStandinWaveViewController
-            vc.amplitudevalue = amplitude / 10
-            vc.periodeValue = periode / 50
+            vc.frequencyValue = frequency
             vc.distance = distance
-            vc.radius = radius / 1000
             vc.showAnchor = anchorSwitch.isOn
             vc.timing = speed * 1.0 / 100
         }

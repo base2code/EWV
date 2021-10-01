@@ -13,13 +13,12 @@ class _3DStandinWaveViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet weak var sceneView: ARSCNView!
     let configuration = ARWorldTrackingConfiguration()
+    let radius = 0.001
     
     var timer = Timer()
     
-    var amplitudevalue = Double()
-    var periodeValue = Double()
+    var frequencyValue = Double()
     var distance = Double()
-    var radius = Double()
     
     var showAnchor = Bool()
 
@@ -43,7 +42,6 @@ class _3DStandinWaveViewController: UIViewController, ARSCNViewDelegate {
             sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
         }
         
-        print(amplitudevalue)
         
 //        startTimer()
         spawnNodesWithAnimation()
@@ -102,13 +100,13 @@ class _3DStandinWaveViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func calculateY(x: Double) -> Double {
-        return ((sin(x * 10 * 1.0 / (periodeValue))) * amplitudevalue) / 10
+        return (sin(x * 10 * 1.0 / (frequencyValue)))
     }
 
     @objc func calculateStep() {
         // Picture of function: /media/triangle_function.jpeg
-        let p1 = 2 * amplitudevalue / Double.pi
-        let p2 = ((2 * Double.pi) / periodeValue) * startstep
+        let p1 = 2 * 10 / Double.pi
+        let p2 = ((2 * Double.pi) / frequencyValue) * startstep
         let p3 = sin(p2)
         let p4 = asin(p3)
         step = p1 * p4

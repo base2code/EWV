@@ -13,13 +13,12 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet weak var sceneView: ARSCNView!
     let configuration = ARWorldTrackingConfiguration()
+    let radius = 0.001
     
     var timer = Timer()
     
-    var amplitudevalue = Double()
-    var periodeValue = Double()
+    var frequencyValue = Double()
     var distance = Double()
-    var radius = Double()
     
     var showAnchor = Bool()
 
@@ -33,6 +32,13 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var zmove: UISlider!
     
     var xmovealready = 0.0;
+    
+    let c = 299792458.0
+
+    func calculatePeriode(frequency: Double) -> Double {
+        return c / frequency
+    }
+
     
     @IBAction func xmoveaction(_ sender: Any) {
         for node in nodesArray {
@@ -169,7 +175,7 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     
     @objc func calculateAllNodes() {
         for node in nodesArray {
-            let y = calculateY(x: ((Double(node.position.x))) - xmovealready) * step - Double(node.position.y)
+            let y = calculateY(x: ((Double(node.position.x))) - xmovealready) - Double(node.position.y)
             let action = SCNAction.moveBy(x: CGFloat(0), y: CGFloat(y) + CGFloat((ymove.value / 100.0)), z: 0, duration: TimeInterval(timing))
             node.runAction(action)
                                         
@@ -179,16 +185,20 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func calculateY(x: Double) -> Double {
-        return ((sin(x * 10 * 1.0 / (periodeValue))) * amplitudevalue) / 10
+        let lamda = calculatePeriode(frequency: frequencyValue * 1000000000)
+        return (sin(x*((2*Double.pi)/lamda)-step)+sin(x*((2*Double.pi)/lamda)+step)) / 100
+        //return (sin(x * 10 * 1.0 / (calculatePeriode(frequency: frequencyValue * 1000000000))))
     }
 
     @objc func calculateStep() {
         // Picture of function: /media/triangle_function.jpeg
-        let p1 = 2 * amplitudevalue / Double.pi
-        let p2 = ((2 * Double.pi) / periodeValue) * startstep
-        let p3 = sin(p2)
-        let p4 = asin(p3)
-        step = p1 * p4
+        //let p1 = 2 * 0.10 / Double.pi
+        //let p2 = ((2 * Double.pi) / calculatePeriode(frequency: frequencyValue * 1000000000)) * startstep
+        //let p3 = sin(p2)
+        //let p4 = asin(p3)
+        //step = p1 * p4
+        step += 0.2
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

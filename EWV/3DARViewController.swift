@@ -17,7 +17,7 @@ class ThreeDARViewController: UIViewController, ARSCNViewDelegate {
     var timer = Timer()
     
     var amplitudevalue = 1.0
-    var periodeValue = 1.0
+    var frequencyValue = 1.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,20 +72,20 @@ class ThreeDARViewController: UIViewController, ARSCNViewDelegate {
                 let node = SCNNode();
                 node.geometry = SCNSphere(radius: 0.01)
                 node.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
-                let tmp1 = Double((Double(periodeValue) * 1.0 / 2.5) + x)
-                let tmp2 = Double((Double(periodeValue) * 1.0 / 2.5) + z)
+                let tmp1 = Double((Double(frequencyValue) * 1.0 / 2.5) + x)
+                let tmp2 = Double((Double(frequencyValue) * 1.0 / 2.5) + z)
                 node.position = SCNVector3(Double(0), calculateY(x: Double(tmp1), z: Double(tmp2)), Double(0))
                 
                 var z1 = 0.0
                 if z < 0 {
-                    z1 = Double(periodeValue * 1.0 / 2.5) * 5 * z * -1;
+                    z1 = Double(frequencyValue * 1.0 / 2.5) * 5 * z * -1;
                 }else if z > 0{
-                    z1 = Double(periodeValue * 1.0 / 2.5) * 5 * z;
+                    z1 = Double(frequencyValue * 1.0 / 2.5) * 5 * z;
                 }
                 
 //                let z1 = Double(Periode.value * 1.0 / 2.5) * z
                 
-                let x1 = Double(periodeValue * 1.0 / 2.5)
+                let x1 = Double(frequencyValue * 1.0 / 2.5)
 //                let x1 = 2 * Double(Periode.value) * Double(step) + x
 //                if x < 0 {
 //                    x1 = 32 * x * -1
