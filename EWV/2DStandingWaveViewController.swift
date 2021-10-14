@@ -257,6 +257,10 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     override open var shouldAutorotate: Bool {
         return false
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
 
 }

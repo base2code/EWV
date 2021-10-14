@@ -117,6 +117,10 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         return pickerData[row]
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     /*
     // MARK: - Navigation
 
