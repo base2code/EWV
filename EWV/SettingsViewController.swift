@@ -11,7 +11,18 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBOutlet weak var frqText: UITextField!
     @IBOutlet weak var disText: UITextField!
-    @IBOutlet weak var speText: UITextField!
+    
+    @IBOutlet weak var frqSliderOutlet: UISlider!
+    @IBOutlet weak var disSliderOutlet: UISlider!
+    
+    @IBAction func frequencyChanged(_ sender: Any) {
+        frqText.text = String(frqSliderOutlet.value);
+    }
+    
+    @IBAction func distanceChanged(_ sender: Any) {
+        disText.text = String(disSliderOutlet.value);
+    }
+    
     
     var pickerData: [String] = [String]()
     
@@ -60,9 +71,6 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         }
         if let dis = Double(disText.text!) {
             self.distance = dis
-        }
-        if let spe = Double(speText.text!) {
-            self.speed = spe
         }
         
         let selected = Picker.selectedRow(inComponent: 0)
