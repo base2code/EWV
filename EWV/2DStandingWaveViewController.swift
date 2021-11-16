@@ -158,7 +158,7 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     var nodesArray: [SCNNode] = []
     
     @objc func spawnNodesWithAnimation() {
-        for x in stride(from: 0.0, to: distance, by: radius) {
+        for x in stride(from: 0.0, to: distance + 1, by: radius) {
             let node = SCNNode();
             node.geometry = SCNSphere(radius: CGFloat(radius))
             node.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
