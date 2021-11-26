@@ -32,7 +32,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         self.Picker.delegate = self
         self.Picker.dataSource = self
         
-        pickerData = ["3D Wave", "2D standing wave", "3D standing wave", "4"]
+        pickerData = ["Stehende Welle"]
         
         //Looks for single or multiple taps.
              let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -75,34 +75,20 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         let selected = Picker.selectedRow(inComponent: 0)
         if (selected == 0){
-            performSegue(withIdentifier: "3dvariables", sender: sender)
-        }else if (selected == 1){
             performSegue(withIdentifier: "2dStandingWaveVariables", sender: sender)
-        }else if (selected == 2){
-            performSegue(withIdentifier: "3dStandingWaveVariables", sender: sender)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selected = Picker.selectedRow(inComponent: 0)
         if selected == 0 {
-            let vc = segue.destination as! ThreeDARViewController
-            vc.frequencyValue = frequency
-        }else if selected == 1 {
             let vc = segue.destination as! _2DStandingWaveViewController
             vc.frequencyValue = frequency
             vc.distance = distance
             vc.showAnchor = anchorSwitch.isOn
             vc.timing = speed / 500
             print("Timing: " + String(vc.timing))
-        }else if selected == 2 {
-            let vc = segue.destination as! _3DStandinWaveViewController
-            vc.frequencyValue = frequency
-            vc.distance = distance
-            vc.showAnchor = anchorSwitch.isOn
-            vc.timing = speed * 1.0 / 100
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
