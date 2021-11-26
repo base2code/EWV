@@ -25,7 +25,6 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     var timing = Double()
     
     var step = 1.0
-    var startstep = 1.0
     
     @IBOutlet weak var xmove: UISlider!
     @IBOutlet weak var ymove: UISlider!
@@ -174,7 +173,6 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
         
         nodesArray.removeAll()
         step = 1.0
-        startstep = 1.0
     }
     
     var nodesArray: [SCNNode] = []
@@ -202,45 +200,13 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
             node.runAction(action)
                                         
         }
-        calculateStep()
-        startstep += 0.005
+        step += 0.2
     }
     
     @objc func calculateY(x: Double) -> Double {
         let lamda = calculatePeriode(frequency: frequencyValue * 1000000000)
         return (sin(x*((2*Double.pi)/lamda)-step)+sin(x*((2*Double.pi)/lamda)+step)) / 100
-        //return (sin(x * 10 * 1.0 / (calculatePeriode(frequency: frequencyValue * 1000000000))))
-    }
-
-    @objc func calculateStep() {
-        // Picture of function: /media/triangle_function.jpeg
-        //let p1 = 2 * 0.10 / Double.pi
-        //let p2 = ((2 * Double.pi) / calculatePeriode(frequency: frequencyValue * 1000000000)) * startstep
-        //let p3 = sin(p2)
-        //let p4 = asin(p3)
-        //step = p1 * p4
-        step += 0.2
         
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first!
-        if(touch.view == self.sceneView){
-            let viewTouchLocation:CGPoint = touch.location(in: sceneView)
-            guard let result = sceneView.hitTest(viewTouchLocation, options: nil).first else {
-                return
-            }
-            if nodesArray.contains(result.node) {
-                measurement.text = getExperimentCurrent(node: result.node)
-            }
-
-        }
-    }
-    @IBOutlet weak var measurement: UILabel!
-    
-    @objc func getExperimentCurrent(node: SCNNode) -> String {
-        // TODO: Insert formular to calculate voltage when measured in experiment
-        return "Hallo"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -249,17 +215,6 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
         // Pause the view's session
         sceneView.session.pause()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
