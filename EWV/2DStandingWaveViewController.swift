@@ -46,6 +46,11 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
             node.runAction(action)
         }
         xmovealready = Double(xmove.value / 100.0)
+        
+        if (originButton.isOn) {
+            originFunction(show: false)
+            originFunction(show: true)
+        }
     }
     
     var zmovealready = 0.0;
@@ -56,13 +61,26 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
             node.runAction(action)
         }
         zmovealready = Double(zmove.value / 100.0)
+        
+        if (originButton.isOn) {
+            originFunction(show: false)
+            originFunction(show: true)
+        }
     }
+    
+    @IBAction func ymoveaction(_ sender: Any) {
+        if (originButton.isOn) {
+            originFunction(show: false)
+            originFunction(show: true)
+        }
+    }
+    
     
     var originArray: [SCNNode] = []
     @IBOutlet weak var originButton: UISwitch!
     
-    @IBAction func originAction(_ sender: Any) {
-        if originButton.isOn {
+    func originFunction(show: Bool) {
+        if show {
             var x0 = SCNVector3();
             x0.x = xmove.value / 100.0
             x0.y = ymove.value / 100.0
@@ -99,6 +117,10 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
                 node.removeFromParentNode()
             }
         }
+    }
+    
+    @IBAction func originAction(_ sender: Any) {
+        originFunction(show: originButton.isOn)
     }
     
     func lineBetweenNodes(positionA: SCNVector3, positionB: SCNVector3, inScene: SCNScene, color: UIColor) -> SCNNode {

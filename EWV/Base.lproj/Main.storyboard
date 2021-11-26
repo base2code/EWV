@@ -237,6 +237,9 @@
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-20" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="Wka-1K-ARy">
                                 <rect key="frame" x="46" y="588" width="315" height="30"/>
+                                <connections>
+                                    <action selector="ymoveaction:" destination="3r0-qd-WIL" eventType="valueChanged" id="xsz-e9-rCT"/>
+                                </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-20" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="ti2-dR-R41">
                                 <rect key="frame" x="46" y="625" width="315" height="30"/>
