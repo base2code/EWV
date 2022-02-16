@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1xJ-g5-tUt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20036.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1xJ-g5-tUt">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20018.1"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -223,12 +223,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messwerte (Bitte klicke auf einen Punkt)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJN-Dr-PmJ">
-                                <rect key="frame" x="16" y="59" width="343" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-20" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="FSS-89-y4T">
                                 <rect key="frame" x="46" y="551" width="315" height="30"/>
                                 <connections>
@@ -295,23 +289,19 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="WAG-tj-J4V" firstAttribute="leading" secondItem="LVE-ez-z1P" secondAttribute="leading" id="02P-l3-Ngy"/>
-                            <constraint firstItem="bJN-Dr-PmJ" firstAttribute="leading" secondItem="Cao-n6-jB8" secondAttribute="leading" id="0Xp-Bb-48C"/>
                             <constraint firstItem="TUA-JX-UWM" firstAttribute="centerY" secondItem="cMe-1Q-WMz" secondAttribute="centerY" id="0xW-1X-PyB"/>
+                            <constraint firstItem="XRt-xm-pIK" firstAttribute="centerX" secondItem="wHO-mt-C0d" secondAttribute="centerX" id="1Hi-Z2-B37"/>
                             <constraint firstItem="Cao-n6-jB8" firstAttribute="centerY" secondItem="FSS-89-y4T" secondAttribute="centerY" id="1g1-ed-W00"/>
                             <constraint firstItem="TUA-JX-UWM" firstAttribute="leading" secondItem="FSS-89-y4T" secondAttribute="leading" id="2HE-lP-i1X"/>
-                            <constraint firstItem="XRt-xm-pIK" firstAttribute="top" secondItem="bJN-Dr-PmJ" secondAttribute="bottom" constant="-36" id="3vL-GW-r5K"/>
                             <constraint firstItem="oYg-zO-msN" firstAttribute="bottom" secondItem="ti2-dR-R41" secondAttribute="bottom" constant="13" id="4ic-1l-REE"/>
-                            <constraint firstItem="bJN-Dr-PmJ" firstAttribute="trailing" secondItem="FSS-89-y4T" secondAttribute="trailing" id="8a5-zx-Ji7"/>
                             <constraint firstItem="ti2-dR-R41" firstAttribute="top" secondItem="Wka-1K-ARy" secondAttribute="bottom" constant="8" id="8zT-GS-EUR"/>
                             <constraint firstItem="cMe-1Q-WMz" firstAttribute="top" secondItem="XRt-xm-pIK" secondAttribute="bottom" constant="13" id="9xI-lI-8NG"/>
                             <constraint firstItem="FSS-89-y4T" firstAttribute="top" secondItem="TUA-JX-UWM" secondAttribute="bottom" constant="8" id="CQL-Ed-hUC"/>
                             <constraint firstItem="XRt-xm-pIK" firstAttribute="leading" secondItem="oYg-zO-msN" secondAttribute="leading" id="Cki-Vq-6t3"/>
-                            <constraint firstItem="bJN-Dr-PmJ" firstAttribute="centerX" secondItem="XRt-xm-pIK" secondAttribute="centerX" id="Ho6-fl-sq4"/>
                             <constraint firstItem="WAG-tj-J4V" firstAttribute="trailing" secondItem="LVE-ez-z1P" secondAttribute="trailing" id="IMd-of-aga"/>
-                            <constraint firstItem="bJN-Dr-PmJ" firstAttribute="top" secondItem="oYg-zO-msN" secondAttribute="top" constant="15" id="LBG-XQ-UYs"/>
                             <constraint firstItem="Cao-n6-jB8" firstAttribute="leading" secondItem="WAG-tj-J4V" secondAttribute="leading" id="RHA-I2-ZI4"/>
                             <constraint firstItem="WAG-tj-J4V" firstAttribute="top" secondItem="Cao-n6-jB8" secondAttribute="bottom" constant="16" id="SGv-Tk-ThH"/>
-                            <constraint firstItem="bJN-Dr-PmJ" firstAttribute="trailing" secondItem="wHO-mt-C0d" secondAttribute="trailingMargin" id="VhP-f4-TDm"/>
+                            <constraint firstItem="XRt-xm-pIK" firstAttribute="top" secondItem="oYg-zO-msN" secondAttribute="top" id="Ttw-Dr-l81"/>
                             <constraint firstItem="Wka-1K-ARy" firstAttribute="trailing" secondItem="ti2-dR-R41" secondAttribute="trailing" id="Xqq-et-ai9"/>
                             <constraint firstItem="Cao-n6-jB8" firstAttribute="top" secondItem="XRt-xm-pIK" secondAttribute="bottom" constant="51" id="ZIG-jA-Ren"/>
                             <constraint firstItem="WAG-tj-J4V" firstAttribute="centerY" secondItem="Wka-1K-ARy" secondAttribute="centerY" id="cbm-mw-d61"/>
@@ -319,17 +309,17 @@
                             <constraint firstItem="oYg-zO-msN" firstAttribute="bottom" secondItem="LVE-ez-z1P" secondAttribute="bottom" constant="20" id="eAo-aG-Si6"/>
                             <constraint firstItem="cMe-1Q-WMz" firstAttribute="leading" secondItem="TUA-JX-UWM" secondAttribute="trailing" constant="24" id="jgg-xo-pwP"/>
                             <constraint firstItem="LVE-ez-z1P" firstAttribute="top" secondItem="WAG-tj-J4V" secondAttribute="bottom" constant="13" id="kUf-rZ-PXg"/>
+                            <constraint firstItem="Cao-n6-jB8" firstAttribute="leading" secondItem="wHO-mt-C0d" secondAttribute="leadingMargin" id="kVN-L3-ik6"/>
                             <constraint firstItem="Wka-1K-ARy" firstAttribute="top" secondItem="FSS-89-y4T" secondAttribute="bottom" constant="8" id="kv3-LF-V0U"/>
                             <constraint firstItem="Cao-n6-jB8" firstAttribute="centerX" secondItem="WAG-tj-J4V" secondAttribute="centerX" id="mjg-Tz-xkq"/>
                             <constraint firstItem="FSS-89-y4T" firstAttribute="leading" secondItem="Wka-1K-ARy" secondAttribute="leading" id="n7F-or-x6K"/>
                             <constraint firstItem="TUA-JX-UWM" firstAttribute="leading" secondItem="oYg-zO-msN" secondAttribute="leading" constant="48" id="uQz-MN-bTl"/>
-                            <constraint firstItem="bJN-Dr-PmJ" firstAttribute="leading" secondItem="wHO-mt-C0d" secondAttribute="leadingMargin" id="wSb-4i-PcW"/>
+                            <constraint firstItem="FSS-89-y4T" firstAttribute="trailing" secondItem="wHO-mt-C0d" secondAttribute="trailingMargin" id="x4c-WP-HWF"/>
                             <constraint firstItem="FSS-89-y4T" firstAttribute="trailing" secondItem="Wka-1K-ARy" secondAttribute="trailing" id="xKG-tr-zW4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ghw-W3-zC0"/>
                     <connections>
-                        <outlet property="measurement" destination="bJN-Dr-PmJ" id="d4g-Ns-75C"/>
                         <outlet property="originButton" destination="TUA-JX-UWM" id="Phf-Ma-7yd"/>
                         <outlet property="sceneView" destination="XRt-xm-pIK" id="6P2-3Y-Udn"/>
                         <outlet property="xmove" destination="FSS-89-y4T" id="3Ac-Pg-uXE"/>

@@ -190,7 +190,10 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
             
         }
         
-        Timer.scheduledTimer(timeInterval: TimeInterval(timing), target: self, selector: #selector(calculateAllNodes), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: TimeInterval(timing),
+                             target: self,
+                             selector: #selector(calculateAllNodes),
+                             userInfo: nil, repeats: true)
     }
     
     @objc func calculateAllNodes() {
