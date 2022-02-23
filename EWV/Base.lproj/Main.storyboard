@@ -49,7 +49,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TS6-s8-9sa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1993" y="-278"/>
+            <point key="canvasLocation" x="2299" y="-534"/>
         </scene>
         <!--Settings-->
         <scene sceneID="aaq-2V-t4e">
@@ -280,8 +280,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="sceneView" translatesAutoresizingMaskIntoConstraints="NO" id="XRt-xm-pIK">
-                                <rect key="frame" x="0.0" y="44" width="375" height="460"/>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" sceneName="sceneView" translatesAutoresizingMaskIntoConstraints="NO" id="XRt-xm-pIK">
+                                <rect key="frame" x="0.0" y="44" width="375" height="465"/>
                                 <gestureRecognizers/>
                             </arscnView>
                         </subviews>
@@ -340,7 +340,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" sceneName="sceneView" translatesAutoresizingMaskIntoConstraints="NO" id="B48-q1-nqm">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="640"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </arscnView>
                         </subviews>
@@ -354,7 +354,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hra-wA-3ls" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2814" y="430"/>
+            <point key="canvasLocation" x="2984" y="-534"/>
         </scene>
     </scenes>
     <resources>

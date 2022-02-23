@@ -8,6 +8,7 @@
 import UIKit
 import ARKit
 import SceneKit
+import GLKit
 
 class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     
@@ -37,7 +38,6 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     func calculatePeriode(frequency: Double) -> Double {
         return c / frequency
     }
-
     
     @IBAction func xmoveaction(_ sender: Any) {
         for node in nodesArray {
@@ -45,6 +45,9 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
             node.runAction(action)
         }
         xmovealready = Double(xmove.value / 100.0)
+        
+        /*plateNode.position.x = xmove.value
+        senderNode.position.x = Float(xmove.value + Float(distance))*/
         
         if (originButton.isOn) {
             originFunction(show: false)
@@ -139,6 +142,11 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
             return lineNode
         }
     
+    let arVew: ARSCNView = {
+        let view = ARSCNView()
+        view.translatesAutoresizingMaskIntoConstraints = false;
+        return view;
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,7 +154,17 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
         removeNodes()
         
         // Set the view's delegate
+        
+        
+
+        view.addSubview(arVew)
+        configuration.planeDetection = .horizontal
+        
+        arVew.session.run(configuration, options: [])
+        arVew.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        
         sceneView.delegate = self
+        
         
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
@@ -161,6 +179,8 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        configuration.planeDetection = .horizontal
 
         // Run the view's session
         sceneView.session.run(configuration)
@@ -177,8 +197,64 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     
     var nodesArray: [SCNNode] = []
     
+    let plateNode = SCNNode();
+    let senderNode = SCNNode();
+    
     @objc func spawnNodesWithAnimation() {
-        for x in stride(from: 0.0, to: distance + 1, by: radius) {
+        // Platte
+        var x1 = SCNVector3()
+        x1.x = 0
+        x1.y = -0.05
+        x1.z = -0.05
+        
+        var x2 = SCNVector3()
+        x2.x = 0
+        x2.y = 0.05
+        x2.z = -0.05
+        
+        var x3 = SCNVector3()
+        x3.x = 0
+        x3.y = 0.05
+        x3.z = 0.05
+        
+        var x4 = SCNVector3()
+        x4.x = 0
+        x4.y = -0.05
+        x4.z = 0.05
+        
+        
+        
+        /*let line1 = lineBetweenNodes(positionA: x1, positionB: x2, inScene: sceneView.scene, color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.8))
+        
+        plateArray.append(line1)
+        
+        sceneView.scene.rootNode.addChildNode(line1)*/
+        
+        let plane = SCNPlane(width: 0.1, height: 0.1);
+        plane.cornerRadius = 0.01
+        
+        plateNode.geometry = plane
+        plateNode.geometry?.firstMaterial?.diffuse.contents = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.8)
+        //planeNode.rotation = SCNVector4(0.0, 0.0, 0.0, )
+        plateNode.position = SCNVector3(0.0, 0.0, 0.0)
+        plateNode.rotation = SCNVector4Make(0, 1, 0, Float(Double.pi/2));
+        //planeNode.transform = SCNMatrix4Mult(planeNode.transform, SCNMatrix4MakeRotation(90.0, 1, 0, 0))
+        
+        sceneView.scene.rootNode.addChildNode(plateNode)
+        
+        
+        let senderPlane = SCNPlane(width: 0.05, height: 0.05)
+        senderPlane.cornerRadius = 0.005
+        
+        senderNode.geometry = senderPlane;
+        senderNode.geometry?.firstMaterial?.diffuse.contents = UIColor.init(red: 0, green: 0, blue: 250, alpha: 0.8)
+        senderNode.position = SCNVector3(distance, 0.0, 0.0)
+        senderNode.rotation = SCNVector4Make(0, -1, 0, Float(Double.pi/2));
+        
+        sceneView.scene.rootNode.addChildNode(senderNode)
+        
+        
+        for x in stride(from: 0.0, to: distance, by: radius) {
             let node = SCNNode();
             node.geometry = SCNSphere(radius: CGFloat(radius))
             node.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
@@ -201,7 +277,6 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
             let y = calculateY(x: ((Double(node.position.x))) - xmovealready) - Double(node.position.y)
             let action = SCNAction.moveBy(x: CGFloat(0), y: CGFloat(y) + CGFloat((ymove.value / 100.0)), z: 0, duration: TimeInterval(timing))
             node.runAction(action)
-                                        
         }
         step += 0.2
     }
@@ -240,6 +315,11 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        guard anchor is ARPlaneAnchor else {return}
+        print("Plane detetcted")
     }
 
 
