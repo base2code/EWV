@@ -247,7 +247,7 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
         senderPlane.cornerRadius = 0.005
         
         senderNode.geometry = senderPlane;
-        senderNode.geometry?.firstMaterial?.diffuse.contents = UIColor.init(red: 0, green: 0, blue: 250, alpha: 0.8)
+        senderNode.geometry?.firstMaterial?.diffuse.contents = UIColor.init(red: 0, green: 0, blue: 100, alpha: 0.8)
         senderNode.position = SCNVector3(distance, 0.0, 0.0)
         senderNode.rotation = SCNVector4Make(0, -1, 0, Float(Double.pi/2));
         
