@@ -32,18 +32,29 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var zmove: UISlider!
     
     var xmovealready = 0.0;
+    var ymovealready = 0.0;
+    var zmovealready = 0.0;
     
     let c = 299792458.0
+    
+    let plateNode = SCNNode();
+    let senderNode = SCNNode();
 
     func calculatePeriode(frequency: Double) -> Double {
         return c / frequency
     }
     
     @IBAction func xmoveaction(_ sender: Any) {
+        let action = SCNAction.moveBy(x: CGFloat(Double(xmove.value) / 100.0 - xmovealready), y: CGFloat(0), z: CGFloat(0), duration: TimeInterval(timing))
+        
         for node in nodesArray {
-            let action = SCNAction.moveBy(x: CGFloat(Double(xmove.value) / 100.0 - xmovealready), y: CGFloat(0), z: CGFloat(0), duration: TimeInterval(timing))
             node.runAction(action)
         }
+        
+        // Plate & Sender Node
+        plateNode.runAction(action)
+        senderNode.runAction(action)
+        
         xmovealready = Double(xmove.value / 100.0)
         
         /*plateNode.position.x = xmove.value
@@ -55,13 +66,17 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    var zmovealready = 0.0;
-    
     @IBAction func zmoveaction(_ sender: Any) {
+        let action = SCNAction.moveBy(x: CGFloat(0), y: CGFloat(0), z: CGFloat(Double(zmove.value) / 100.0 - zmovealready), duration: TimeInterval(timing))
+        
         for node in nodesArray {
-            let action = SCNAction.moveBy(x: CGFloat(0), y: CGFloat(0), z: CGFloat(Double(zmove.value) / 100.0 - zmovealready), duration: TimeInterval(timing))
             node.runAction(action)
         }
+        
+        // Plate & Sender Node
+        plateNode.runAction(action)
+        senderNode.runAction(action)
+        
         zmovealready = Double(zmove.value / 100.0)
         
         if (originButton.isOn) {
@@ -75,6 +90,12 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
             originFunction(show: false)
             originFunction(show: true)
         }
+        
+        let action = SCNAction.moveBy(x: CGFloat(0), y: CGFloat(Double(ymove.value) / 100.0 - ymovealready), z: CGFloat(0), duration: TimeInterval(timing))
+        plateNode.runAction(action)
+        senderNode.runAction(action)
+        
+        ymovealready = Double(ymove.value / 100.0)
     }
     
     
@@ -196,9 +217,6 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     }
     
     var nodesArray: [SCNNode] = []
-    
-    let plateNode = SCNNode();
-    let senderNode = SCNNode();
     
     @objc func spawnNodesWithAnimation() {
         // Platte
