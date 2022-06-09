@@ -27,6 +27,8 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
     
     var step = 1.0
     
+    var line = Bool()
+    
     @IBOutlet weak var xmove: UISlider!
     @IBOutlet weak var ymove: UISlider!
     @IBOutlet weak var zmove: UISlider!
@@ -115,15 +117,15 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
             x1.z = zmove.value / 100.0
             
             x1.x = xmove.value / 100.0 + Float(0.5)
-            let xdir = lineBetweenNodes(positionA: x0, positionB: x1, inScene: sceneView.scene, color: UIColor.red)
+            let xdir = lineBetweenNodes(positionA: x0, positionB: x1, inScene: sceneView.scene, color: UIColor.red, radius: 0.002)
             
             x1.x = xmove.value / 100.0
             x1.y = ymove.value / 100.0 + Float(0.5)
-            let ydir = lineBetweenNodes(positionA: x0, positionB: x1, inScene: sceneView.scene, color: UIColor.green)
+            let ydir = lineBetweenNodes(positionA: x0, positionB: x1, inScene: sceneView.scene, color: UIColor.green, radius: 0.002)
             
             x1.y = ymove.value / 100.0
             x1.z = zmove.value / 100.0 + Float(0.5)
-            let zdir = lineBetweenNodes(positionA: x0, positionB: x1, inScene: sceneView.scene, color: UIColor.blue)
+            let zdir = lineBetweenNodes(positionA: x0, positionB: x1, inScene: sceneView.scene, color: UIColor.blue, radius: 0.002)
             
             
             print(ymove.value / 100.0)
@@ -146,13 +148,13 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
         originFunction(show: originButton.isOn)
     }
     
-    func lineBetweenNodes(positionA: SCNVector3, positionB: SCNVector3, inScene: SCNScene, color: UIColor) -> SCNNode {
+    func lineBetweenNodes(positionA: SCNVector3, positionB: SCNVector3, inScene: SCNScene, color: UIColor, radius: Double) -> SCNNode {
             let vector = SCNVector3(positionA.x - positionB.x, positionA.y - positionB.y, positionA.z - positionB.z)
             let distance = sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z)
             let midPosition = SCNVector3 (x:(positionA.x + positionB.x) / 2, y:(positionA.y + positionB.y) / 2, z:(positionA.z + positionB.z) / 2)
 
             let lineGeometry = SCNCylinder()
-            lineGeometry.radius = 0.002
+            lineGeometry.radius = radius
             lineGeometry.height = CGFloat(distance)
             lineGeometry.radialSegmentCount = 5
             lineGeometry.firstMaterial!.diffuse.contents = color
@@ -272,16 +274,20 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene.rootNode.addChildNode(senderNode)
         
         
-        for x in stride(from: 0.0, to: distance, by: radius) {
-            let node = SCNNode();
-            node.geometry = SCNSphere(radius: CGFloat(radius))
-            node.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
-            node.position = SCNVector3(x, calculateY(x: Double(x)), Double(0))
-            
-            nodesArray.append(node)
-            
-            sceneView.scene.rootNode.addChildNode(node)
-            
+        if (!line) {
+            for x in stride(from: 0.0, to: distance, by: radius) {
+                let node = SCNNode();
+                node.geometry = SCNSphere(radius: CGFloat(radius))
+                node.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
+                node.position = SCNVector3(x, calculateY(x: Double(x)), Double(0))
+                
+                nodesArray.append(node)
+                
+                sceneView.scene.rootNode.addChildNode(node)
+                
+            }
+        } else {
+            spawnLineNodes();
         }
         
         Timer.scheduledTimer(timeInterval: TimeInterval(timing),
@@ -290,13 +296,56 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
                              userInfo: nil, repeats: true)
     }
     
-    @objc func calculateAllNodes() {
-        for node in nodesArray {
-            let y = calculateY(x: ((Double(node.position.x))) - xmovealready) - Double(node.position.y)
-            let action = SCNAction.moveBy(x: CGFloat(0), y: CGFloat(y) + CGFloat((ymove.value / 100.0)), z: 0, duration: TimeInterval(timing))
-            node.runAction(action)
+    @objc func spawnLineNodes() {
+        var xprev = Float(0.0)
+        var yprev = Float(0.0)
+        var zprev = Float(0.0)
+        
+        for x in stride(from: 0.0, to: distance, by: radius) {
+            if (xprev == 0.0) {
+                xprev = Float(x);
+                continue;
+            }
+            var vec1 = SCNVector3();
+            vec1.x = xprev + (xmove.value / 100);
+            vec1.y = yprev + (ymove.value / 100);
+            vec1.z = zprev + (zmove.value / 100);
+            
+            var vec2 = SCNVector3();
+            vec2.x = Float(x) + (xmove.value / 100);
+            vec2.y = Float(calculateY(x: Double(x))) + (ymove.value / 100);
+            vec2.z = (zmove.value / 100)
+            
+            xprev = vec2.x - (xmove.value / 100)
+            yprev = vec2.y - (ymove.value / 100)
+            zprev = vec2.z - (zmove.value / 100)
+            
+            let node = lineBetweenNodes(positionA: vec1, positionB: vec2, inScene: sceneView.scene, color: UIColor.red, radius: 0.00025)
+            
+            nodesArray.append(node)
+            
+            sceneView.scene.rootNode.addChildNode(node)
+            
         }
-        step += 0.2
+    }
+    
+    @objc func calculateAllNodes() {
+        if (!line) {
+            for node in nodesArray {
+                let y = calculateY(x: ((Double(node.position.x))) - xmovealready) - Double(node.position.y)
+                let action = SCNAction.moveBy(x: CGFloat(0), y: CGFloat(y) + CGFloat((ymove.value / 100.0)), z: 0, duration: TimeInterval(timing))
+                node.runAction(action)
+            }
+            step += 0.2
+        } else {
+            for node in nodesArray {
+                node.removeFromParentNode();
+            }
+            nodesArray = []
+            
+            spawnLineNodes()
+            step += 0.1
+        }
     }
     
     @objc func calculateY(x: Double) -> Double {

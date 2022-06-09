@@ -32,7 +32,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         self.Picker.delegate = self
         self.Picker.dataSource = self
         
-        pickerData = ["Stehende Welle"]
+        pickerData = ["Stehende Welle (Punkte)", "Stehende Welle (Linie)"]
         
         //Looks for single or multiple taps.
              let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -62,8 +62,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 //    var selected = 1;
     
     
-    // 0 - 3D Wave
-    // 1 - 2D Standing wave
+    // 0 - 2D Standing wave
+    // 1 - 2D Standing with line
     
     @IBAction func startARButton(_ sender: Any) {
         if let frq = Double(frqText.text!) {
@@ -76,6 +76,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         let selected = Picker.selectedRow(inComponent: 0)
         if (selected == 0){
             performSegue(withIdentifier: "2dStandingWaveVariables", sender: sender)
+        } else if (selected == 1){
+            performSegue(withIdentifier: "2dStandingWaveVariables", sender: sender)
         }
     }
     
@@ -87,6 +89,15 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             vc.distance = distance
             vc.showAnchor = anchorSwitch.isOn
             vc.timing = speed / 500
+            vc.line = false
+            print("Timing: " + String(vc.timing))
+        } else if selected == 1 {
+            let vc = segue.destination as! _2DStandingWaveViewController
+            vc.frequencyValue = frequency
+            vc.distance = distance
+            vc.showAnchor = anchorSwitch.isOn
+            vc.timing = speed / 1000
+            vc.line = true
             print("Timing: " + String(vc.timing))
         }
     }
