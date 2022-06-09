@@ -301,7 +301,7 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
         var yprev = Float(0.0)
         var zprev = Float(0.0)
         
-        for x in stride(from: 0.0, to: distance, by: radius) {
+        for x in stride(from: 0.0, to: distance, by: radius/2) {
             if (xprev == 0.0) {
                 xprev = Float(x);
                 continue;
@@ -320,7 +320,7 @@ class _2DStandingWaveViewController: UIViewController, ARSCNViewDelegate {
             yprev = vec2.y - (ymove.value / 100)
             zprev = vec2.z - (zmove.value / 100)
             
-            let node = lineBetweenNodes(positionA: vec1, positionB: vec2, inScene: sceneView.scene, color: UIColor.red, radius: 0.00025)
+            let node = lineBetweenNodes(positionA: vec1, positionB: vec2, inScene: sceneView.scene, color: UIColor.red, radius: 0.00025 / 2)
             
             nodesArray.append(node)
             
